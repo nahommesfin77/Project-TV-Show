@@ -8,6 +8,10 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
+  text-align: center;
+}
+#title{
+  text-align: center;
 }
 
 .episode-card {
@@ -29,7 +33,7 @@ body {
 
 .episode-card h2 {
   margin: 0;
-  font-size: 1.2em;
+  font-size: 1.3em;
    text-align: center;
 }
 
