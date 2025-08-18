@@ -17,6 +17,8 @@ body {
   padding: 15px;
    flex-direction: column;
   justify-content: flex-start;
+  position: relative;           /* needed for absolute positioning of link */
+  padding-bottom: 56px;
 }
 
 .episode-card img {
@@ -37,9 +39,18 @@ body {
 }
 
 .episode-card a {
+   position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  display: block;
+  text-align: center;
+  padding: 8px 10px;
   color: #1a0dab;
   text-decoration: none;
-   margin-top: auto;
+  font-size: 0.92rem;
+  background: transparent;
+  border-radius: 6px;
 }
 
 .episode-card a:hover {
