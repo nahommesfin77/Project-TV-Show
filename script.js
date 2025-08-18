@@ -36,3 +36,21 @@ function makePageForEpisodes(episodeList) {
     link.href = episode.url;
     link.textContent = "View on TVMaze";
     link.target = "_blank";
+
+     // Append elements to episodeDiv
+    episodeDiv.appendChild(title);
+    episodeDiv.appendChild(img);
+    episodeDiv.appendChild(summary);
+    episodeDiv.appendChild(link);
+
+    // Append episodeDiv to root
+    rootElem.appendChild(episodeDiv);
+  });
+
+  // Add footer credit to TVMaze
+  const footer = document.createElement("p");
+  footer.innerHTML = `Data provided by <a href="https://www.tvmaze.com/" target="_blank">TVMaze.com</a>`;
+  rootElem.appendChild(footer);
+}
+
+window.onload = setup;
