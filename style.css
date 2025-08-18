@@ -12,3 +12,20 @@ body {
   margin-bottom: 20px;
   max-width: 600px;
 }
+
+.episode-card img {
+  max-width: 100%;
+  border-radius: 4px;
+  display: block;
+  margin: 10px 0;
+}
+
+.episode-card h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.episode-card a {
+  color: #1a0dab;
+  text-decoration: none;
+}
