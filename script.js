@@ -6,7 +6,10 @@ function setup() {
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-}
-
-window.onload = setup;
+  rootElem.textContent = "";
+  
+ episodeList.forEach(episode => {
+    // Create container div for each episode
+    const episodeDiv = document.createElement("div");
+    episodeDiv.className = "episode-card";
+ }
