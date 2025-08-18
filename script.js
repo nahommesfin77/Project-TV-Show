@@ -25,4 +25,9 @@ function makePageForEpisodes(episodeList) {
     // Episode image
     const img = document.createElement("img");
     img.src = episode.image.medium;
-    img.alt = `${episode.name} image`;})
+    img.alt = `${episode.name} image`;
+
+    // Episode summary
+    const summary = document.createElement("div");
+    summary.innerHTML = episode.summary;
+ }
