@@ -30,4 +30,9 @@ function makePageForEpisodes(episodeList) {
     // Episode summary
     const summary = document.createElement("div");
     summary.innerHTML = episode.summary;
- }
+
+    // TVMaze link
+    const link = document.createElement("a");
+    link.href = episode.url;
+    link.textContent = "View on TVMaze";
+    link.target = "_blank";
