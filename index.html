@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>TV Show Project | Nahom Mesfin</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
@@ -11,28 +14,38 @@
   <body>
     <header class="site-header" role="banner">
       <div id="title">
-        <h1>GAME OF THRONES</h1>
+        <h1>TV SHOWS</h1>
+        <p class="subtitle">Browse shows — click a title to view episodes</p>
       </div>
-      <p class="subtitle">Episodes</p>
 
-      <!-- Controls row -->
-      <div class="controls">
-        <label for="search">Search:</label>
-        <input type="text" id="search" placeholder="Search by title or summary..." />
-        <span id="episode-count"></span>
+      <div class="controls" role="navigation" aria-label="Main controls">
+        <button id="back-to-shows" class="btn hidden">← Back to Shows</button>
 
-        <label for="episode-selector">Jump to:</label>
-        <select id="episode-selector"></select>
+        <select id="show-selector" aria-label="Select show">
+          <option value="">-- Select a show --</option>
+        </select>
+
+        <div class="search-wrap">
+          <input id="search" type="search" placeholder="Search shows, genres, or episode titles..." aria-label="Search shows or episodes" />
+          <button id="clear-search" class="clear-btn" title="Clear search" aria-label="Clear search" hidden>✕</button>
+        </div>
+
+        <select id="episode-selector" aria-label="Jump to episode">
+          <option value="">-- All Episodes --</option>
+        </select>
+
+        <div class="count-wrap" aria-live="polite">
+          <span id="episode-count" class="results-count"></span>
+        </div>
       </div>
     </header>
 
-    <!-- Main episode grid -->
-    <main id="root">
-      <p>Please enable JavaScript to view the episodes.</p>
+    <main id="root" role="main" aria-live="polite">
+      <p class="muted">Please enable JavaScript to view the content.</p>
     </main>
-
-    
-    <!-- Your logic -->
+ <p class="credit">
+      Data provided by <a href="https://www.tvmaze.com/" target="_blank" rel="noopener">TVMaze.com</a>
+    </p>
     <script src="script.js" defer></script>
   </body>
 </html>
