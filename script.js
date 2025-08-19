@@ -1,3 +1,7 @@
+let allShows = [];
+let episodesCache = {}; // store episodes per show id
+let currentEpisodes = [];
+
 function setup() {
   // Fetch episodes from TVMaze API (Game of Thrones = show 82)
   fetch("https://api.tvmaze.com/shows/82/episodes")
