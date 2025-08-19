@@ -1,37 +1,50 @@
 function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
-  populateEpisodeSelector(allEpisodes);
-
-  // Search functionality
-  const searchInput = document.getElementById("search");
-  searchInput.addEventListener("input", (event) => {
-    const searchTerm = event.target.value.toLowerCase();
-    const filteredEpisodes = allEpisodes.filter(ep =>
-      ep.name.toLowerCase().includes(searchTerm) ||
-      ep.summary.toLowerCase().includes(searchTerm)
-    );
-    makePageForEpisodes(filteredEpisodes);
-    populateEpisodeSelector(filteredEpisodes);
-  });
-
-  // Dropdown functionality
-  const selector = document.getElementById("episode-selector");
-  selector.addEventListener("change", (event) => {
-    const selectedIndex = event.target.value;
-    if (selectedIndex === "") {
+  // Fetch episodes from TVMaze API (Game of Thrones = show 82)
+  fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then((response) => response.json())
+    .then((allEpisodes) => {
       makePageForEpisodes(allEpisodes);
-    } else {
-      makePageForEpisodes([allEpisodes[selectedIndex]]);
-    }
-  });
+      populateEpisodeSelector(allEpisodes);
+
+      // Search functionality
+      const searchInput = document.getElementById("search");
+      searchInput.addEventListener("input", (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        const filteredEpisodes = allEpisodes.filter(
+          (ep) =>
+            ep.name.toLowerCase().includes(searchTerm) ||
+            ep.summary.toLowerCase().includes(searchTerm)
+        );
+        makePageForEpisodes(filteredEpisodes);
+        populateEpisodeSelector(filteredEpisodes);
+      });
+
+      // Dropdown functionality
+      const selector = document.getElementById("episode-selector");
+      selector.addEventListener("change", (event) => {
+        const selectedId = event.target.value;
+        if (selectedId === "") {
+          makePageForEpisodes(allEpisodes);
+        } else {
+          const selectedEpisode = allEpisodes.find(
+            (ep) => ep.id === Number(selectedId)
+          );
+          makePageForEpisodes([selectedEpisode]);
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching episodes:", error);
+      document.getElementById("root").textContent =
+        "Failed to load episodes. Please try again later.";
+    });
 }
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.textContent = "";
 
-  episodeList.forEach(episode => {
+  episodeList.forEach((episode) => {
     const episodeDiv = document.createElement("div");
     episodeDiv.className = "episode-card";
 
@@ -43,11 +56,11 @@ function makePageForEpisodes(episodeList) {
     title.textContent = `${episode.name} (${episodeCode})`;
 
     const img = document.createElement("img");
-    img.src = episode.image.medium;
+    img.src = episode.image?.medium || "";
     img.alt = `${episode.name} image`;
 
     const summary = document.createElement("div");
-    summary.innerHTML = episode.summary;
+    summary.innerHTML = episode.summary || "No summary available.";
 
     const link = document.createElement("a");
     link.href = episode.url;
@@ -75,11 +88,11 @@ function makePageForEpisodes(episodeList) {
 function populateEpisodeSelector(episodeList) {
   const selector = document.getElementById("episode-selector");
   selector.innerHTML = `<option value="">-- All Episodes --</option>`;
-  episodeList.forEach((ep, index) => {
+  episodeList.forEach((ep) => {
     const seasonCode = String(ep.season).padStart(2, "0");
     const numberCode = String(ep.number).padStart(2, "0");
     const option = document.createElement("option");
-    option.value = index;
+    option.value = ep.id; // use unique episode ID from API
     option.textContent = `${ep.name} (S${seasonCode}E${numberCode})`;
     selector.appendChild(option);
   });
